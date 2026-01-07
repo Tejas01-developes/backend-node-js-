@@ -10,16 +10,7 @@ const{name,email,password}=req.body;
 if(!name || !email || !password){
     return resp.status(400).json({success:false,message:"fill each field"})
 }try{
-// db.query(
-//     'SELECT email FROM users WHERE email=?',
-//     [email],
-//    async (err,result)=>{
-// if(err){
-//     return resp.status(400).json({success:false,message:"database error"})
-// }
-// if(result.length > 0 ){
-//     return resp.status(400).json({success:false,message:"email is already present"})
-// }
+
 const hash=await bcrypt.hash(password,10);
 
 db.query(
@@ -43,8 +34,8 @@ db.query(
 
 )
 
-    // }
-// )
+    
+
 }catch(err){
     console.log("error",err);
 }
