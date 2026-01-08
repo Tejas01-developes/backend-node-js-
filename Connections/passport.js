@@ -17,7 +17,7 @@ async(accesstoken,refreshtoken,profile,done)=>{
         const email=profile.emails[0].value;
         const googleid=profile.id;
         const name=profile.displayName;
-        console.log(email,googleid,name);
+      
         db.query(
             'SELECT * FROM users WHERE email=?',
             [email],

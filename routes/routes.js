@@ -17,30 +17,30 @@ router.get("/get",cookiefilter,getfriends);
 router.post("/send",cookiefilter,upload.single("file"),sendmsg);
 router.get("/getmsg",cookiefilter,getmessages);
 
-router.get("/google",passport.authenticate("google",{
-    scope:["profile","email"]
-}))
+// router.get("/google",passport.authenticate("google",{
+//     scope:["profile","email"]
+// }))
 
 
-router.get("/google/callback",passport.authenticate("google",{
-    session:false,
-    failureRedirect:"/"
-}),
-(req,resp)=>{
-const access=accesstoken({email:req.user.email})
-const refresh=refreshtoken({email:req.user.email})
+// router.get("/google/callback",passport.authenticate("google",{
+//     session:false,
+//     failureRedirect:"/"
+// }),
+// (req,resp)=>{
+// const access=accesstoken({email:req.user.email})
+// const refresh=refreshtoken({email:req.user.email})
 
-resp.cookie("refresh",refresh,{
-    httpOnly:true,
-    sameSite:"Lax",
-    secure:true,
-    path:"/"
-})
+// resp.cookie("refresh",refresh,{
+//     httpOnly:true,
+//     sameSite:"Lax",
+//     secure:true,
+//     path:"/"
+// })
 
-resp.redirect(`http://localhost:5173/home?token=${access}`);
-}
+// resp.redirect(`http://localhost:5173/home?token=${access}`);
+// }
 
-)
+// )
 
 
 

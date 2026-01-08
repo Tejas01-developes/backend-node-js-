@@ -2,6 +2,7 @@
 import express from 'express';
 import { accesstoken, refreshtoken } from '../tokens/tokens.js';
 import passport from 'passport';
+import { tokenss } from '../Connections/accessrefresh.js';
 const router2=express.Router();
 
 
@@ -16,20 +17,22 @@ router2.get("/google/callback",passport.authenticate("google",{
     session:false,
     failureRedirect:"/"
 }),
-(req,resp)=>{
-const access=accesstoken({email:req.user.email})
-const refresh=refreshtoken({email:req.user.email})
+// (req,resp)=>{
+// const access=accesstoken({email:req.user.email})
+// const refresh=refreshtoken({email:req.user.email})
+// // resp.status(400).json({success:true,message:"login done",access:access})
+// resp.cookie("refresh",refresh,{
+//     httpOnly:true,
+//     sameSite:"Lax",
+//     secure:true,
+//     path:"/"
+// })
+// console.log("access", access)
+// console.log("refresh", refresh)
+// resp.redirect(`http://localhost:5173/home?token=${access}`);
 
-resp.cookie("refresh",refresh,{
-    httpOnly:true,
-    sameSite:"Lax",
-    secure:true,
-    path:"/"
-})
-
-resp.redirect(`http://localhost:5173/home?token=${access}`);
-}
-
+// }
+tokenss
 )
 
 

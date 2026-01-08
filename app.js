@@ -30,7 +30,10 @@ io.on("connection",(socket)=>{
 console.log("socket connected",socket.id)
 
 socket.on("join",(email)=>{
-    onlineuser.set(email,socket.id)
+    onlineuser.set(email,socket.id);
+    io.emit("online",[
+        ...onlineuser.keys()
+    ])
     console.log("joined",email)
 })
 
@@ -47,6 +50,11 @@ socket.on("sendmessage",({sender,reciver,type,msg,filename})=>{
 
 })
 
+
+
+
+
+
 socket.on("disconnect",()=>{
     for(const[email,id] of onlineuser.entries()){
         if(id === socket.id){
@@ -54,6 +62,7 @@ socket.on("disconnect",()=>{
             break
         }
     }
+    io.emit("online",[...onlineuser.keys()])
 })
 
 })

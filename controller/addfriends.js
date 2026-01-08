@@ -1,4 +1,4 @@
-import e from 'express';
+
 import {db} from '../Connections/mysql.js'
 
 
