@@ -50,6 +50,19 @@ socket.on("sendmessage",({sender,reciver,type,msg,filename})=>{
 
 })
 
+socket.on("typing", ({ sender, reciver }) => {
+    const reciverSocket = onlineuser.get(reciver);
+    if (reciverSocket) {
+        io.to(reciverSocket).emit("typing", { sender });
+    }
+});
+
+socket.on("stop_typing", ({ sender, reciver }) => {
+    const reciverSocket = onlineuser.get(reciver);
+    if (reciverSocket) {
+        io.to(reciverSocket).emit("stop_typing", { sender });
+    }
+});
 
 
 

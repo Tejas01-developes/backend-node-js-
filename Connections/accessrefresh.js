@@ -10,8 +10,17 @@ resp.cookie("refresh",refresh,{
     secure:true,
     path:"/"
 })
-return resp.status(400).json({success:true,message:"login done",access:access})
-// resp.redirect(`http://localhost:5173/home?token=${access}`);
+
+resp.cookie("access",access,{
+    httpOnly:true,
+    sameSite:"Lax",
+    secure:true,
+    path:"/"
+})
+
+// return resp.status(400).json({success:true,message:"login done",access:access})
+resp.redirect(`http://localhost:5173/home`);
+
 }
 
 
